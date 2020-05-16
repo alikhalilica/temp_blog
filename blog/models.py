@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from taggit.managers import TaggableManager
 # Create your models here.
 
 class Category(models.Model):
@@ -10,6 +11,7 @@ class Category(models.Model):
 
 
 class Post(models.Model):
+    STATUS = ((0,"draft"),(1,"publish"))
     title=models.CharField(max_length=200)
     slug=models.SlugField(max_length=200, unique=True, allow_unicode=True)
     Content=models.TextField()
@@ -18,8 +20,10 @@ class Post(models.Model):
     image=models.ImageField(upload_to = "blog/" , blank=True)
     #category=models.ForeignKey(Category,on_delete=models.CASCADE,blank=True,null=True) #{{post.category.name}}
     category=models.ManyToManyField(Category) #{% for  cat in post.category.all %} <li><a href="#">{{cat.name}}</a></li> {% endfor %}
-    #tags
-    #status
+    tags = TaggableManager()
+    status = models.IntegerField(choices = STATUS,default=0 )
+    updated_date = models.DateTimeField(auto_now=True)
+    publish_date = models.DateTimeField(blank =True,null = True)
     #published_date
 
     def __str__(self):
@@ -28,3 +32,4 @@ class Post(models.Model):
     def snippet(self):
         return self.Content[:100] +"..."
 # Create your models here.
+#django-taggit

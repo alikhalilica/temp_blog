@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'google_analytics',
     'website',
     'blog',
+    'taggit',
 ]
 
 MIDDLEWARE = [
