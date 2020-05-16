@@ -109,7 +109,7 @@
 									<a class="posts-title" href="{% url 'blog:post' post_slug=post.slug %}"><h3>{{post.title}}</h3></a>
 									<p class="excert"> {{post.snippet}}
 									</p>
-									<a href="blog-single.html" class="primary-btn">View More</a>
+									<a href="{% url 'blog:post' post_slug=post.slug %}" class="primary-btn">View More</a>
 								</div>
 							</div>
 							{% endfor %}
@@ -151,19 +151,19 @@
 			                        </form>
 								</div>
 								<div class="single-sidebar-widget user-info-widget">
-									<img src="{% static 'img/blog/user-info.png' %}" alt="">
-									<a href="#"><h4>Charlie Barber</h4></a>
+									<img src="{{writer.avatar.url}}" alt="">
+									<a href="#"><h4>{{writer.user.get_full_name}} </h4></a>
 									<p>
-										Senior blog writer
+										{{writer.job_title}}
 									</p>
 									<ul class="social-links">
-										<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-										<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-										<li><a href="#"><i class="fa fa-github"></i></a></li>
-										<li><a href="#"><i class="fa fa-behance"></i></a></li>
+										<li><a href="https://facebook.com/{{writer.facebook}}"><i class="fa fa-facebook"></i></a></li>
+										<li><a href="https://twitter.com/{{writer.twitter}}"><i class="fa fa-twitter"></i></a></li>
+										<li><a href="https://github.com/{{writer.github}}"><i class="fa fa-github"></i></a></li>
+										
 									</ul>
 									<p>
-										Boot camps have its supporters andit sdetractors. Some people do not understand why you should have to spend money on boot camp when you can get. Boot camps have itssuppor ters andits detractors.
+										{{writer.bio}}
 									</p>
 								</div>
 								<div class="single-sidebar-widget popular-post-widget">
