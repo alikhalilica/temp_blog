@@ -39,10 +39,17 @@ class Comment (models.Model):
     body = models.TextField()
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
     created_date=models.DateField(auto_now_add=True,blank=True, null=True)
+    approved_comment = models.BooleanField(default=False)
+    parent = models.ForeignKey('self',null=True,blank=True,on_delete=models.CASCADE,related_name="replies")
+    
 
     def __str__ (self):
         return self.subject
 
+    def approve(self):
+        self.approved_comment = True
+        self.save
+    
     
 
 # Create your models here.
