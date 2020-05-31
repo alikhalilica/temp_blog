@@ -5,6 +5,7 @@ from .models import Post,Category,Comment
 from taggit.models import Tag
 from account.models import account
 from .forms import CommentForm
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 
 # root page
@@ -13,7 +14,16 @@ def index(request):
     user = get_object_or_404(users,user__username = "alikhalili")
     #posts= Post.objects.all().order_by("-created_date")
     posts = Post.objects.filter(status=1).order_by("-created_date")
-    context = {"posts":posts,"writer":user}
+    paginator = Paginator(posts,2)
+    page = request.GET.get('page')
+
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)    
+    context = {"posts":posts,"writer":user,'page':page}
     return render(request,"blog/blog-home.html",context)
 # Create your views here.
 
