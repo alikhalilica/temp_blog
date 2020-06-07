@@ -9,7 +9,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-
 class Post(models.Model):
     STATUS = ((0,"draft"),(1,"publish"))
     title=models.CharField(max_length=200)
