@@ -4,7 +4,7 @@ astroid==2.3.3
 beautifulsoup4==4.8.2
 billiard==3.3.0.23
 celery==3.1.26.post2
-certifi==2020.4.5
+certifi==2022.12.7
 chardet==3.0.4
 colorama==0.4.3
 Django==2.2.11
